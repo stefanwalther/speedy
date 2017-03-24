@@ -6,7 +6,8 @@
   "author": "Stefan Walther",
   "license": "MIT",
   "scripts": {
-    "doc": "verb"
+    "doc": "verb",
+    "precommit": "verb"
   },
   "verb": {
     "run": true,
@@ -28,5 +29,8 @@
       "verb",
       "verb-readme-generator"
     ]
+  },
+  "devDependencies": {
+    "husky": "^0.13.3"
   }
 }
