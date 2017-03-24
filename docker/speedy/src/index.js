@@ -1,3 +1,11 @@
+const Influx = require('influx');
+const influx = new Influx.InfluxDB({
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    schema: [
+
+    ]
+});
 const speedTest = require('speedtest-net');
 const test = speedTest({maxTime: 5000});
 
