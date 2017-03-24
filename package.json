@@ -1,0 +1,32 @@
+{
+  "name": "speedy",
+  "version": "0.0.1",
+  "description": "Test your internet speed.",
+  "repository": "https://github.com/stefanwalther/speedy",
+  "author": "Stefan Walther",
+  "license": "MIT",
+  "scripts": {
+    "doc": "verb"
+  },
+  "verb": {
+    "run": true,
+    "toc": false,
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": []
+    },
+    "lint": {
+      "reflinks": true
+    },
+    "reflinks": [
+      "verb",
+      "verb-readme-generator"
+    ]
+  }
+}
