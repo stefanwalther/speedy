@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "doc": "verb",
-    "precommit": "echo precommit",
+    "precommit": "echo no-precommit",
     "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build"
   },
   "verb": {
