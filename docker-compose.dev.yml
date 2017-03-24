@@ -18,5 +18,8 @@ services:
       - DB_HOST=db
       - DB_PORT=8086
       - DB_NAME=speedy
+    links:
+      - db
+    command: ["yarn", "start:dev"]
 
 

@@ -11,6 +11,8 @@
   },
   "scripts": {
     "start": "nodemon ./src/index.js",
+    "start:dev": "nodemon -L --watch ./src --exec yarn run start",
+    "lint": "yarn run lint:src",
     "lint:src": "eslint src",
     "lint:src:fix": "eslint src --fix",
     "precommit": "yarn run lint --quiet"
