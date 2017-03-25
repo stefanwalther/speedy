@@ -12,6 +12,6 @@ RUN yarn install
 
 COPY /src ./src/
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["yarn", "run", "start"]

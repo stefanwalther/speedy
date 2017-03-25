@@ -23,12 +23,12 @@ console.log('ENV => DB_PORT', process.env.DB_PORT);
 console.log('ENV => DB_NAME', process.env.DB_NAME);
 
 // run it every minute
-// schedule.scheduleJob('* * * * *', () => {
-//
-// });
+schedule.scheduleJob('* * * * *', () => {
+  run();
+});
 
 // run it every 10 seconds
-setInterval(run, 10000);
+//setInterval(run, 10000);
 
 function run() {
   const test = speedTest({maxTime: 5000});
@@ -38,28 +38,38 @@ function run() {
   test.on('data', data => {
     // console.dir(data);
 
-    influx
-      .writePoints([
-        {
-          measurement: 'speed_test',
-          fields: {
-            download: data.speeds.download,
-            upload: data.speeds.upload
-          },
-          tags: {
-            foo: 'bar'
-          }
+    influx.getDatabaseNames()
+      .then(names => {
+        if (!names.includes(process.env.DB_NAME)) {
+          return influx.createDatabase(process.env.DB_NAME)
         }
-      ])
-      .then(() => {
-        return influx.query(`
-      select * from speed_test
-      order by time desc
-      limit 1
-    `);
       })
-      .then(rows => {
-        rows.forEach(row => console.log(`Download: ${row.download} Upload: ${row.upload}`))
+      .then(() => {
+        influx
+          .writePoints([
+            {
+              measurement: 'speed_test',
+              fields: {
+                download: data.speeds.download,
+                upload: data.speeds.upload
+              },
+              tags: {
+                foo: 'bar'
+              }
+            }
+          ])
+          //Todo: Remove, just for debugging purposes
+          .then(() => {
+            return influx.query(`
+              select * from speed_test
+              order by time desc
+              limit 1
+            `);
+          })
+          .then(rows => {
+            rows.forEach(row => console.log(`Download: ${row.download} Upload: ${row.upload}`));
+            rows.forEach(row => console.log(row));
+          })
       })
 
   });

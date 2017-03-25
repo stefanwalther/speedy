@@ -2,7 +2,8 @@ version: "2"
 
 services:
   db:
-    image: tutum/influxdb
+    container_name: speedy_db
+    image: influxdb
     ports:
       - "8083:8083"
       - "8086:8086"
@@ -10,16 +11,29 @@ services:
       - ./docker/influxdb/db.env
 
   speedy:
+    container_name: speedy
     build:
       context: ./docker/speedy/
     ports:
-      - "3000:3000"
+      - "3001:3001"
     environment:
       - DB_HOST=db
       - DB_PORT=8086
       - DB_NAME=speedy
+    volumes:
+      - ./docker/speedy/:/home/
     links:
       - db
     command: ["yarn", "run", "start:dev"]
 
+  grafana:
+    container_name: speedy_grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    links:
+      - db:db
+    environment:
+      - GF_SERVER_ROOT_URL=http://localhost
+      - GF_SECURITY_ADMIN_PASSWORD=secret
 
