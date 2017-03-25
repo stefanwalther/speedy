@@ -8,7 +8,8 @@
   "scripts": {
     "doc": "verb",
     "precommit": "echo no-precommit",
-    "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build"
+    "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build",
+    "dc-dev-down": "docker-compose --f=./docker-compose.dev.yml down"
   },
   "verb": {
     "run": true,
