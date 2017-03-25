@@ -20,6 +20,6 @@ services:
       - DB_NAME=speedy
     links:
       - db
-    command: ["yarn", "start:dev"]
+    command: ["yarn", "run", "start:dev"]
 
 
