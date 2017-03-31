@@ -16,6 +16,7 @@ services:
       context: ./docker/speedy/
     ports:
       - "3001:3001"
+    restart: always
     environment:
       - DB_HOST=db
       - DB_PORT=8086
