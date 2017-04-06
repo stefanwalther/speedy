@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  db:
+    container_name: speedy_db
+    image: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    env_file:
+      - ./docker/influxdb/db.env
+
+  grafana:
+    container_name: speedy_grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    environment:
+      - GF_SERVER_ROOT_URL=http://localhost
+      - GF_SECURITY_ADMIN_PASSWORD=secret
