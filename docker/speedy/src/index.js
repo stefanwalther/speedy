@@ -1,4 +1,14 @@
 const Influx = require('influx');
+
+const settings = {
+  INTERVAL: process.env.INTERVAL || '* * * * *',
+  DB_HOST: process.env.DB_HOST,
+  DB_PORT: process.env.DB_PORT,
+  DB_NAME: process.env.DB_NAME,
+  MAX_TIME: process.env.MAX_TIME || 5000
+
+};
+
 const influx = new Influx.InfluxDB({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
@@ -10,7 +20,7 @@ const influx = new Influx.InfluxDB({
         upload: Influx.FieldType.INTEGER
       },
       tags: [
-        'foo'
+        'interval'
       ]
     }
   ]
@@ -18,9 +28,11 @@ const influx = new Influx.InfluxDB({
 const speedTest = require('speedtest-net');
 const schedule = require('node-schedule');
 
-console.log('ENV => DB_HOST', process.env.DB_HOST);
-console.log('ENV => DB_PORT', process.env.DB_PORT);
-console.log('ENV => DB_NAME', process.env.DB_NAME);
+console.log('ENV => DB_HOST ==>', settings.DB_HOST);
+console.log('ENV => DB_PORT ==>', settings.DB_PORT);
+console.log('ENV => DB_NAME ==>', settings.DB_NAME);
+console.log('ENV => INTERVAL ==>', settings.INTERVAL);
+console.log('ENV => MAX_TIME ==>', settings.MAX_TIME);
 
 // run it every minute
 schedule.scheduleJob('* * * * *', () => {
@@ -28,10 +40,10 @@ schedule.scheduleJob('* * * * *', () => {
 });
 
 // run it every 10 seconds
-//setInterval(run, 10000);
+// setInterval(run, 10000);
 
 function run() {
-  const test = speedTest({maxTime: 5000});
+  const test = speedTest({maxTime: settings.MAX_TIME});
 
   // console.log('Run speed test');
 
@@ -54,7 +66,7 @@ function run() {
                 upload: data.speeds.upload
               },
               tags: {
-                foo: 'bar'
+                interval: settings.INTERVAL``
               }
             }
           ])
