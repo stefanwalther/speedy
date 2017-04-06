@@ -66,7 +66,7 @@ function run() {
                 upload: data.speeds.upload
               },
               tags: {
-                interval: settings.INTERVAL``
+                interval: settings.INTERVAL
               }
             }
           ])

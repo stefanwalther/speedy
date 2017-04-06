@@ -19,7 +19,7 @@
           "datasource": "local",
           "fill": 5,
           "id": 1,
-          "interval": "",
+          "INTERVAL": "",
           "legend": {
             "alignAsTable": false,
             "avg": true,
