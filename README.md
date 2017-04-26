@@ -2,7 +2,24 @@
 
 > Test your internet speed.
 
-JUST A PRIVATE PROJECT, NOTHING TO SHOW, YET.
+NOTE: NOT READY TO BE USED, YET.
+STILL UNDER DEVELOPMENT.
+
+A very simplistic solution to track, monitor & analyze your internet speed & bandwidth.
+
+## Run
+
+Run the development environment:
+
+```sh
+$ yarn dc-dev-up
+```
+
+This will essentially spin up three cotainers:
+
+- speedy
+- InfluxDB
+- Grafana
 
 ### Author
 **Stefan Walther**
