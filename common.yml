@@ -12,18 +12,20 @@ services:
       - '8086:8086'
       - '8083:8083'
     restart: always
-#    volumes:
-#      - influxdb_data:/var/lib/influxdb
+    volumes:
+      - influxdb_data:/var/lib/influxdb
 
   grafana:
     env_file:
       - ./configuration.env
-    image: grafana/grafana
+    build:
+      context: ./docker/grafana
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./docker/grafana/config/dashboards:/opt/grafana-dashboards
       - ./docker/grafana/config/grafana.ini:/etc/grafana/grafana.ini
+      - grafana_data:/var/lib/grafana
     environment:
       - GF_SERVER_ROOT_URL=http://localhost
       - GF_SECURITY_ADMIN_PASSWORD=secret
@@ -31,3 +33,4 @@ services:
 
 volumes:
   influxdb_data: {}
+  grafana_data: {}
