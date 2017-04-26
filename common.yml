@@ -16,8 +16,10 @@ services:
     image: grafana/grafana
     ports:
       - "3000:3000"
-    links:
-      - db
+    volumes:
+      - ./docker/grafana/config/dashboards:/opt/grafana-dashboards
+      - ./docker/grafana/config/grafana.ini:/etc/grafana/grafana.ini
     environment:
       - GF_SERVER_ROOT_URL=http://localhost
       - GF_SECURITY_ADMIN_PASSWORD=secret
+      - config=/etc/grafana/grafana.ini

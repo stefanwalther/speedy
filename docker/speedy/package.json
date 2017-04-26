@@ -6,6 +6,7 @@
   "author": "Stefan Walther",
   "license": "MIT",
   "dependencies": {
+    "convert-hrtime": "^1.0.0",
     "influx": "next",
     "node-schedule": "^1.2.1",
     "speedtest-net": "^1.3.1"
@@ -14,9 +15,12 @@
     "start": "node ./src/index.js",
     "start:dev": "nodemon -L --watch ./src --exec yarn run start",
     "lint": "yarn run lint:src",
+    "lint:fix": "yarn run lint:src:fix",
     "lint:src": "eslint src",
     "lint:src:fix": "eslint src --fix",
-    "precommit": "yarn run lint --quiet"
+    "precommit": "yarn run lint --quiet",
+    "d-build": "docker build -t stefanwalther/speedy .",
+    "d-run": "docker run stefanwalther/speedy"
   },
   "devDependencies": {
     "eslint": "^3.18.0",

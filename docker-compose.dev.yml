@@ -2,10 +2,23 @@ version: "2"
 
 services:
 
+  db:
+    extends:
+      file: common.yml
+      service: db
+
+  grafana:
+    extends:
+      file: common.yml
+      service: grafana
+    depends_on:
+      - db
+
   speedy:
     container_name: speedy
     build:
-      context: ./docker/speedy/
+      context: ./docker/speedy
+      dockerfile: Dockerfile
     ports:
       - "3001:3001"
     restart: always
@@ -15,7 +28,7 @@ services:
       - DB_NAME=speedy
     volumes:
       - ./docker/speedy/:/home/
-    links:
+    depends_on:
       - db
     command: ["yarn", "run", "start:dev"]
 

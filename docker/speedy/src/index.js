@@ -1,4 +1,7 @@
 const Influx = require('influx');
+const speedTest = require('speedtest-net');
+const schedule = require('node-schedule');
+const convertHrtime = require('convert-hrtime');
 
 const settings = {
   INTERVAL: process.env.INTERVAL || '* * * * *',
@@ -6,7 +9,6 @@ const settings = {
   DB_PORT: process.env.DB_PORT,
   DB_NAME: process.env.DB_NAME,
   MAX_TIME: process.env.MAX_TIME || 5000
-
 };
 
 const influx = new Influx.InfluxDB({
@@ -17,35 +19,38 @@ const influx = new Influx.InfluxDB({
       measurement: 'speed_test',
       fields: {
         download: Influx.FieldType.INTEGER,
-        upload: Influx.FieldType.INTEGER
+        upload: Influx.FieldType.INTEGER,
+        originalUpload: Influx.FieldType.INTEGER,
+        originalDownload: Influx.FieldType.INTEGER,
+        executionTime: Influx.FieldType.FLOAT
       },
       tags: [
-        'interval'
+        'interval',
+        'isp',
+        'host'
       ]
     }
   ]
 });
-const speedTest = require('speedtest-net');
-const schedule = require('node-schedule');
 
-console.log('ENV => DB_HOST ==>', settings.DB_HOST);
-console.log('ENV => DB_PORT ==>', settings.DB_PORT);
-console.log('ENV => DB_NAME ==>', settings.DB_NAME);
-console.log('ENV => INTERVAL ==>', settings.INTERVAL);
-console.log('ENV => MAX_TIME ==>', settings.MAX_TIME);
+// console.log('ENV => DB_HOST ==>', settings.DB_HOST);
+// console.log('ENV => DB_PORT ==>', settings.DB_PORT);
+// console.log('ENV => DB_NAME ==>', settings.DB_NAME);
+// console.log('ENV => INTERVAL ==>', settings.INTERVAL);
+// console.log('ENV => MAX_TIME ==>', settings.MAX_TIME);
 
 // run it every minute
-schedule.scheduleJob('* * * * *', () => {
-  run();
+schedule.scheduleJob(settings.INTERVAL, () => {
+  runSpeedTest();
 });
 
+// Just for debugging purposes
 // run it every 10 seconds
 // setInterval(run, 10000);
 
-function run() {
+function runSpeedTest() {
+  let t = process.hrtime();
   const test = speedTest({maxTime: settings.MAX_TIME});
-
-  // console.log('Run speed test');
 
   test.on('data', data => {
     // console.dir(data);
@@ -53,24 +58,30 @@ function run() {
     influx.getDatabaseNames()
       .then(names => {
         if (!names.includes(process.env.DB_NAME)) {
-          return influx.createDatabase(process.env.DB_NAME)
+          return influx.createDatabase(process.env.DB_NAME);
         }
       })
       .then(() => {
+        let t1 = process.hrtime(t);
         influx
           .writePoints([
             {
               measurement: 'speed_test',
               fields: {
                 download: data.speeds.download,
-                upload: data.speeds.upload
+                upload: data.speeds.upload,
+                originalUpload: data.speeds.originalUpload,
+                originalDownload: data.speeds.originalDownload,
+                executionTime: convertHrtime(t1).s
               },
               tags: {
-                interval: settings.INTERVAL
+                interval: settings.INTERVAL,
+                isp: data.client.isp,
+                host: data.server.host
               }
             }
           ])
-          //Todo: Remove, just for debugging purposes
+          // Todo: Remove, just for debugging purposes
           .then(() => {
             return influx.query(`
               select * from speed_test
@@ -79,10 +90,11 @@ function run() {
             `);
           })
           .then(rows => {
-            rows.forEach(row => console.log(`Download: ${row.download} Upload: ${row.upload}`));
-            rows.forEach(row => console.log(row));
-          })
-      })
+            rows.forEach(row => console.log({Download: row.download, Upload: row.upload, ExecutionTime: row.executionTime}));
+            // Log the entire entry (for debugging purposes)
+            // rows.forEach(row => console.log(row));
+          });
+      });
 
   });
 
@@ -92,9 +104,8 @@ function run() {
   // });
 
   test.on('error', err => {
-    console.error(err);
+    console.error('An error occurred performing the test', err);
   });
 
 }
-
 
