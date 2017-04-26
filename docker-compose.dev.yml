@@ -7,12 +7,12 @@ services:
       file: common.yml
       service: influxdb
 
-#  grafana:
-#    extends:
-#      file: common.yml
-#      service: grafana
-#    depends_on:
-#      - influxdb
+  grafana:
+    extends:
+      file: common.yml
+      service: grafana
+    depends_on:
+      - influxdb
 
   speedy:
     build:
@@ -34,3 +34,4 @@ services:
 
 volumes:
   influxdb_data: {}
+  grafana_data: {}
