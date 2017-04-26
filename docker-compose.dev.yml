@@ -14,23 +14,22 @@ services:
 #    depends_on:
 #      - influxdb
 
-#  speedy:
-#    container_name: speedy
-#    build:
-#      context: ./docker/speedy
-#      dockerfile: Dockerfile
-#    env_file:
-#      - ./configuration.env
-#    ports:
-#      - "3001:3001"
-#    restart: always
-#    environment:
-#      - DB_HOST=influxdb
-#    volumes:
-#      - ./docker/speedy/:/home/
-#    depends_on:
-#      - influxdb
-#    command: ["yarn", "run", "start:dev"]
+  speedy:
+    build:
+      context: ./docker/speedy
+      dockerfile: Dockerfile
+    env_file:
+      - ./configuration.env
+    ports:
+      - "3001:3001"
+    restart: always
+    environment:
+      - DB_HOST=influxdb
+    volumes:
+      - ./docker/speedy/:/home/
+    depends_on:
+      - influxdb
+    command: ["yarn", "run", "start:dev"]
 
 
 volumes:
