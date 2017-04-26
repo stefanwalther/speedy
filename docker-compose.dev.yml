@@ -2,35 +2,36 @@ version: "2"
 
 services:
 
-  db:
+  influxdb:
     extends:
       file: common.yml
-      service: db
+      service: influxdb
 
-  grafana:
-    extends:
-      file: common.yml
-      service: grafana
-    depends_on:
-      - db
+#  grafana:
+#    extends:
+#      file: common.yml
+#      service: grafana
+#    depends_on:
+#      - influxdb
 
-  speedy:
-    container_name: speedy
-    build:
-      context: ./docker/speedy
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
-    restart: always
-    environment:
-      - DB_HOST=db
-      - DB_PORT=8086
-      - DB_NAME=speedy
-    volumes:
-      - ./docker/speedy/:/home/
-    depends_on:
-      - db
-    command: ["yarn", "run", "start:dev"]
+#  speedy:
+#    container_name: speedy
+#    build:
+#      context: ./docker/speedy
+#      dockerfile: Dockerfile
+#    env_file:
+#      - ./configuration.env
+#    ports:
+#      - "3001:3001"
+#    restart: always
+#    environment:
+#      - DB_HOST=influxdb
+#    volumes:
+#      - ./docker/speedy/:/home/
+#    depends_on:
+#      - influxdb
+#    command: ["yarn", "run", "start:dev"]
 
 
-
+volumes:
+  influxdb_data: {}

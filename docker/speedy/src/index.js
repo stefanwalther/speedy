@@ -6,14 +6,14 @@ const convertHrtime = require('convert-hrtime');
 const settings = {
   INTERVAL: process.env.INTERVAL || '* * * * *',
   DB_HOST: process.env.DB_HOST,
-  DB_PORT: process.env.DB_PORT,
-  DB_NAME: process.env.DB_NAME,
+  DB_PORT: process.env.INFLUXDB_HTTP_BIND_ADDRESS,
+  DB_NAME: process.env.INFLUX_DB,
   MAX_TIME: process.env.MAX_TIME || 5000
 };
 
 const influx = new Influx.InfluxDB({
   host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
+  database: process.env.INFLUX_DB,
   schema: [
     {
       measurement: 'speed_test',
@@ -33,11 +33,11 @@ const influx = new Influx.InfluxDB({
   ]
 });
 
-// console.log('ENV => DB_HOST ==>', settings.DB_HOST);
-// console.log('ENV => DB_PORT ==>', settings.DB_PORT);
-// console.log('ENV => DB_NAME ==>', settings.DB_NAME);
-// console.log('ENV => INTERVAL ==>', settings.INTERVAL);
-// console.log('ENV => MAX_TIME ==>', settings.MAX_TIME);
+console.log('ENV => DB_HOST ==>', settings.DB_HOST);
+console.log('ENV => DB_PORT ==>', settings.DB_PORT);
+console.log('ENV => DB_NAME ==>', settings.DB_NAME);
+console.log('ENV => INTERVAL ==>', settings.INTERVAL);
+console.log('ENV => MAX_TIME ==>', settings.MAX_TIME);
 
 // run it every minute
 schedule.scheduleJob(settings.INTERVAL, () => {
@@ -57,8 +57,8 @@ function runSpeedTest() {
 
     influx.getDatabaseNames()
       .then(names => {
-        if (!names.includes(process.env.DB_NAME)) {
-          return influx.createDatabase(process.env.DB_NAME);
+        if (!names.includes(process.env.INFLUX_DB)) {
+          return influx.createDatabase(process.env.INFLUX_DB);
         }
       })
       .then(() => {
