@@ -1,0 +1,10 @@
+{
+  "name": "speedy",
+  "type": "influxdb",
+  "url": "http://influxdb:8086",
+  "access": "direct",
+  "user": "$INFLUX_USER",
+  "password": "$INFLUX_PASSWORD",
+  "database": "$INFLUX_DB",
+  "basicAuth": false
+}
