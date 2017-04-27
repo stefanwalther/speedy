@@ -1,7 +1,7 @@
 {
   "name": "speedy",
   "version": "0.0.1",
-  "description": "Test your internet speed.",
+  "description": "Test, track, monitor and analyze your internet speed.",
   "repository": "https://github.com/stefanwalther/speedy",
   "author": "Stefan Walther",
   "license": "MIT",
@@ -31,10 +31,11 @@
     },
     "reflinks": [
       "verb",
-      "verb-readme-generator"
+      "verb-generate-readme"
     ]
   },
   "devDependencies": {
+    "gulp-format-md": "^0.1.12",
     "husky": "^0.13.3"
   },
   "dependencies": {}
