@@ -4,6 +4,16 @@
   "description": "A very simplistic solution to track, monitor & analyze your internet speed & bandwidth.",
   "repository": "https://github.com/stefanwalther/speedy",
   "author": "Stefan Walther",
+  "keywords": [
+    "speed-test",
+    "bandwidth",
+    "speed",
+    "speedtest",
+    "speed-test",
+    "docker",
+    "docker-compose",
+    "monitor"
+  ],
   "license": "MIT",
   "scripts": {
     "docs": "verb",
