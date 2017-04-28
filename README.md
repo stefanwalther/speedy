@@ -62,9 +62,18 @@ Access the resulting dashboard at:
 
 ### Configuration
 
-All configurations are stored in `configuration.env`.
+All configurations are stored in [configuration.env](./configuration.env)`configuration.env`.
 
-* speedy - See [here](./docker/speedy/) for more details
+* **speedy**
+
+  - See [here](./docker/speedy/) for more details
+  - [Docker image](https://hub.docker.com/r/stefanwalther/speedy/)
+* **speedy_infuxdb**
+
+  - [Docker image](https://hub.docker.com/r/stefanwalther/speedy-influxdb/)
+* **speedy_grafana**
+
+  - [Docker image](https://hub.docker.com/r/stefanwalther/speedy-grafana/)
 
 ### Reference Links
 
