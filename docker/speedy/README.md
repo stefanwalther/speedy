@@ -9,6 +9,3 @@ Environment variable to set the configuration of speedy:
 - `INTERVAL` - Defines how often the job should run; see cron-jobs for more details (defaults to ```* * * * *```, which equals to run the job every minute)
 - `MAX_TIME` - Max timeout for the speed-test (defaults to `5000`)
 
-## Output
-
-![Speed Tracker](https://github.com/stefanwalther/speedy/blob/master/docker/speedy/docs/images/speed.png)
