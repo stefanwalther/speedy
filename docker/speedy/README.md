@@ -4,6 +4,12 @@
 
 Tiny node.js service to measure the internet download/upload speed at a given interval and save it to InfluxDb.
 
+## Install
+
+```sh
+$ docker pull stefanwalther/speedy
+```
+
 ## Configuration
 
 Environment variable to set the configuration of speedy:
