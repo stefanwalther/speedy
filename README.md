@@ -67,13 +67,13 @@ All configurations are stored in [configuration.env](./configuration.env)`config
 * **speedy**
 
   - See [here](./docker/speedy/) for more details
-  - [Docker image](https://hub.docker.com/r/stefanwalther/speedy/)
+  - [Docker image: ](https://hub.docker.com/r/stefanwalther/speedy/)`stefanwalther/speedy`
 * **speedy_infuxdb**
 
-  - [Docker image](https://hub.docker.com/r/stefanwalther/speedy-influxdb/)
+  - [Docker image: ](https://hub.docker.com/r/stefanwalther/speedy-influxdb/)`stefanwalther/speedy_influxdb`
 * **speedy_grafana**
 
-  - [Docker image](https://hub.docker.com/r/stefanwalther/speedy-grafana/)
+  - [Docker image: ](https://hub.docker.com/r/stefanwalther/speedy-grafana/)`stefanwalther/speedy_grafana`
 
 ### Reference Links
 
