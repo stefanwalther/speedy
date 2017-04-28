@@ -64,7 +64,7 @@ Access the resulting dashboard at:
 
 All configurations are stored in `configuration.env`.
 
-* speedy - See here for more details
+* speedy - See [here](./docker/speedy/) for more details
 
 ### Reference Links
 
