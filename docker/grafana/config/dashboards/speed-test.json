@@ -50,17 +50,19 @@
           "aliasColors": {},
           "bars": false,
           "datasource": "${DS_SPEEDY}",
+          "decimals": 2,
           "fill": 5,
           "hideTimeOverride": true,
           "id": 1,
+          "interval": "",
           "legend": {
             "alignAsTable": false,
             "avg": true,
-            "current": false,
+            "current": true,
             "hideEmpty": false,
             "hideZero": false,
             "max": true,
-            "min": true,
+            "min": false,
             "rightSide": true,
             "show": true,
             "total": false,
@@ -69,7 +71,7 @@
           "lines": true,
           "linewidth": 1,
           "links": [],
-          "nullPointMode": "null as zero",
+          "nullPointMode": "null",
           "percentage": false,
           "pointradius": 2,
           "points": false,
@@ -77,7 +79,7 @@
           "repeat": null,
           "seriesOverrides": [],
           "span": 12,
-          "stack": true,
+          "stack": false,
           "steppedLine": true,
           "targets": [
             {
@@ -86,13 +88,13 @@
               "groupBy": [
                 {
                   "params": [
-                    "auto"
+                    "1m"
                   ],
                   "type": "time"
                 },
                 {
                   "params": [
-                    "linear"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -123,13 +125,13 @@
               "groupBy": [
                 {
                   "params": [
-                    "auto"
+                    "1m"
                   ],
                   "type": "time"
                 },
                 {
                   "params": [
-                    "linear"
+                    "null"
                   ],
                   "type": "fill"
                 }
@@ -164,6 +166,7 @@
             "sort": 0,
             "value_type": "individual"
           },
+          "transparent": false,
           "type": "graph",
           "xaxis": {
             "mode": "time",
@@ -181,7 +184,7 @@
               "show": true
             },
             {
-              "format": "short",
+              "format": "Kbits",
               "label": "",
               "logBase": 1,
               "max": null,
@@ -206,7 +209,7 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -232,5 +235,5 @@
   },
   "timezone": "browser",
   "title": "Speed Test",
-  "version": 3
+  "version": 7
 }

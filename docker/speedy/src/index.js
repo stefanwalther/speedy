@@ -4,16 +4,16 @@ const schedule = require('node-schedule');
 const convertHrtime = require('convert-hrtime');
 
 const settings = {
-  INTERVAL: process.env.INTERVAL || '* * * * *',
-  DB_HOST: process.env.DB_HOST,
-  DB_PORT: process.env.INFLUXDB_HTTP_BIND_ADDRESS || 8086,
-  DB_NAME: process.env.INFLUXDB_DB,
-  MAX_TIME: process.env.MAX_TIME || 5000
+  SPEEDY_DB_HOST: process.env.SPEEDY_DB_HOST,
+  SPEEDY_DB_NAME: process.env.INFLUXDB_DB,
+  SPEEDY_DB_PORT: process.env.INFLUXDB_HTTP_BIND_ADDRESS || 8086,
+  SPEEDY_INTERVAL: process.env.SPEEDY_INTERVAL || '* * * * *',
+  SPEEDY_MAX_TIME: process.env.SPEEDY_MAX_TIME || 5000
 };
 
 const influx = new Influx.InfluxDB({
-  host: settings.DB_HOST,
-  database: settings.DB_NAME,
+  host: settings.SPEEDY_DB_HOST,
+  database: settings.SPEEDY_DB_NAME,
   schema: [
     {
       measurement: 'speed_test',
@@ -33,10 +33,10 @@ const influx = new Influx.InfluxDB({
   ]
 });
 
-console.log('Settings', settings);
+console.log('speedy settings:', settings);
 
 // run it every minute
-schedule.scheduleJob(settings.INTERVAL, () => {
+schedule.scheduleJob(settings.SPEEDY_INTERVAL, () => {
   runSpeedTest();
 });
 
@@ -46,15 +46,15 @@ schedule.scheduleJob(settings.INTERVAL, () => {
 
 function runSpeedTest() {
   let t = process.hrtime();
-  const test = speedTest({maxTime: settings.MAX_TIME});
+  const test = speedTest({maxTime: settings.SPEEDY_MAX_TIME});
 
   test.on('data', data => {
     // console.dir(data);
 
     influx.getDatabaseNames()
       .then(names => {
-        if (!names.includes(settings.DB_NAME)) {
-          return influx.createDatabase(settings.DB_NAME);
+        if (!names.includes(settings.SPEEDY_DB_NAME)) {
+          return influx.createDatabase(settings.SPEEDY_DB_NAME);
         }
       })
       .then(() => {
@@ -71,7 +71,7 @@ function runSpeedTest() {
                 executionTime: convertHrtime(t1).s
               },
               tags: {
-                interval: settings.INTERVAL,
+                interval: settings.SPEEDY_INTERVAL,
                 isp: data.client.isp,
                 host: data.server.host
               }
