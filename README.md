@@ -1,5 +1,7 @@
 # speedy
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/stefanwalther/speedy.svg)](https://greenkeeper.io/)
+
 > A very simplistic solution to track, monitor & analyze your internet speed & bandwidth.
 
 ## About
