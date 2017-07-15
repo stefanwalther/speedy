@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "docs": "verb",
+    "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
     "precommit": "echo no-precommit",
     "dc-dev-up": "docker-compose --f=./docker-compose.dev.yml up --build",
     "dc-dev-down": "docker-compose --f=./docker-compose.dev.yml down",
