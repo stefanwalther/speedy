@@ -27,7 +27,7 @@ services:
       - ./docker/speedy/:/home/
     depends_on:
       - influxdb
-    command: ["yarn", "run", "start:dev"]
+    command: ["npm", "run", "start:dev"]
 
 
 volumes:
