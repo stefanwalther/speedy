@@ -1,0 +1,35 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'start' ]
+2 info using npm@6.4.1
+3 info using node@v10.12.0
+4 verbose config Skipping project config: /home/.npmrc. (matches userconfig)
+5 verbose run-script [ 'prestart', 'start', 'poststart' ]
+6 info lifecycle speedy@0.0.1~prestart: speedy@0.0.1
+7 info lifecycle speedy@0.0.1~start: speedy@0.0.1
+8 verbose lifecycle speedy@0.0.1~start: unsafe-perm in lifecycle true
+9 verbose lifecycle speedy@0.0.1~start: PATH: /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+10 verbose lifecycle speedy@0.0.1~start: CWD: /home
+11 silly lifecycle speedy@0.0.1~start: Args: [ '-c', 'node ./src/index.js' ]
+12 silly lifecycle speedy@0.0.1~start: Returned: code: 134  signal: null
+13 info lifecycle speedy@0.0.1~start: Failed to exec start script
+14 verbose stack Error: speedy@0.0.1 start: `node ./src/index.js`
+14 verbose stack Exit status 134
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:301:16)
+14 verbose stack     at EventEmitter.emit (events.js:182:13)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+14 verbose stack     at ChildProcess.emit (events.js:182:13)
+14 verbose stack     at maybeClose (internal/child_process.js:962:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:251:5)
+15 verbose pkgid speedy@0.0.1
+16 verbose cwd /home
+17 verbose Linux 4.9.93-linuxkit-aufs
+18 verbose argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "start"
+19 verbose node v10.12.0
+20 verbose npm  v6.4.1
+21 error code ELIFECYCLE
+22 error errno 134
+23 error speedy@0.0.1 start: `node ./src/index.js`
+23 error Exit status 134
+24 error Failed at the speedy@0.0.1 start script.
+24 error This is probably not a problem with npm. There is likely additional logging output above.
+25 verbose exit [ 134, true ]
