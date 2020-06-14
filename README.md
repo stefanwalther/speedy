@@ -47,7 +47,7 @@ $ git clone https://github.com/stefanwalther/speedy
 
 Then run from the root directory:
 ```sh
-$ docker-compose -d up
+$ docker-compose up -d
 ```
 
 This will essentially spin up three Docker containers:
